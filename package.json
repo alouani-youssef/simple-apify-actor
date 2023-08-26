@@ -1,0 +1,58 @@
+{
+  "name": "simple-apify-actor",
+  "version": "1.0.0",
+  "description": "apify actor for data extraction",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": "=1.22.19"
+  },
+  "scripts": {
+    "start": "NODE_ENV=production node dist/index.js",
+    "build": "rimraf dist && cross-env NODE_ENV=production babel src -d dist -s",
+    "debug": "nodemon --inspect src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "cross-env NODE_ENV=test jest",
+    "cover": "npm run test -- --coverage",
+    "lint": "eslint --fix src && prettier --write \"src/**/*.js\""
+  },
+  "main": "src/index.js",
+  "repository": "https://github.com/alouani-youssef/web-crawler.git",
+  "author": "ALOUANI YOUSSEF",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "yenv": "^3.0.1"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": true,
+    "trailingComma": "none"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "nodemonConfig": {
+    "execMap": {
+      "js": "babel-node"
+    }
+  },
+  "jest": {
+    "testMatch": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "__tests__",
+      "src/lib/env",
+      "src/bin"
+    ]
+  }
+}
